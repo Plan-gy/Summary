@@ -38,3 +38,53 @@ class TreeNode {
     TreeNode right;
     TreeNode(int x) { val = x; }
 }
+
+
+
+
+
+
+package algorithm;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+/**
+ * 实现一个 MapSum 类里的两个方法，insert 和 sum。
+
+对于方法 insert，你将得到一对（字符串，整数）的键值对。字符串表示键，整数表示值。如果键已经存在，那么原来的键值对将被替代成新的键值对。
+
+对于方法 sum，你将得到一个表示前缀的字符串，你需要返回所有以该前缀开头的键的值的总和。
+
+示例 1:
+
+输入: insert("apple", 3), 输出: Null
+输入: sum("ap"), 输出: 3
+输入: insert("app", 2), 输出: Null
+输入: sum("ap"), 输出: 5
+ * @author ASUS
+ *
+ */
+public class Number677 {
+    private HashMap<String, Integer> x1=new HashMap<String, Integer>();
+	public static void main(String[] args) {
+		System.out.println("asdfj".startsWith("as"));
+	}
+    public void insert(String key, int val) {
+        x1.put(key, val);
+        
+    }
+    
+    public int sum(String prefix) {
+        Set entrySet = x1.entrySet();
+        int sum=0;
+        for(Map.Entry<String,Integer> entry:x1.entrySet()) {
+        	if(entry.getKey().startsWith(prefix)) {
+        		sum+=entry.getValue();
+        	}
+        }
+        return sum;
+    }
+}
