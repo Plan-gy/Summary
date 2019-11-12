@@ -41,3 +41,82 @@ Mark Word中，如果CAS操作成功，持有偏向锁的线程以后每次进�
 9.spring配置文件怎么配。
 10.发红包功能测试。
 29分钟。
+
+
+linux命令
+mkdir：创建目录
+rmdir：删除空文件夹
+cp：复制文件 或文件夹
+mv：移动文件或文件夹，可以在移动的时候重命名
+
+
+ls：查看文件
+
+
+
+
+网络命令：
+Ifconfig：查看网卡信息
+ping：检测网络连通性
+wget：文件地址，下载地址。
+Service network restart:重启网络服务
+Shutdown -h关机
+Shutdown -r重启
+
+tar:
+-zcvf 压缩后文件名 打包的目录 :生成.tar.gz文件 注：这个命令先用tar归档，然后把归档的包压缩成.gz
+-zxvf 要解压的文件名 ：解压缩.tar.bz2的文件
+-jcvf 压缩后的文件名 打包的目录：生成.tar.bz2 注：这个命令先用tar归档，然后把归档的包压缩成.bz2
+-jxvf 要解压的文件名 :解压.tar.bz2的文件
+zip:
+zip -r 压缩生成的文件名 要压缩的目录
+zip 压缩生成的文件名 要压缩的文件。
+unzip:
+unzip 要解压缩的文
+yum命令
+yum list :获取服务器上所有可用的软件的列表
+yum search 关键字：搜索服务器上所有和关键字相关的包
+yum -y install 包名：安装软件包
+install:安装
+-y:自动回答yes
+yum -y update 包名：升级软件包
+update:升级
+-y:自动回答yes
+如果没有包名，就会升级所有的软件包，包括Linux内核。慎用
+yum -y remove 包名
+remove:卸载
+-y:自动回答yes
+注：yum会自动卸载依赖包，而很有可能这个依赖包也被别的包依赖，所以很危险，慎用。
+yum grouplist:列出所有可用的软件组列表
+yum groupinstall 软件组名：安装指定软件组，组名可以由grouplist查询出来 注：如果查询出来的软件组名中间有空格，要使用""引起来。
+yum groupremove 软件组名：卸载指定软件组
+
+
+
+
+
+
+
+ps aux|grep 应用名    获得应用的端口号
+netstat -apn.查看所有端口占用程序
+netstat -apn|grep 端口号。查看端口占用
+kill 杀掉正在占用端口号的应用
+Cp    复制
+Rm  删除
+mkdir
+mv
+Ls    查看文件夹
+cd文件夹目录   到达文件夹
+tar  zxvf    解压压缩包
+ifconfig
+chmod 授权
+vim
+pwd输出当前位置
+yum install安装软件
+find -name 全局查找文件
+可以使用一下命令查使用内存最多的5个进程
+ps -aux | sort -k4nr | head 5
+top
+-M 按内存排序
+-P 按cpu排序
+
