@@ -1,0 +1,109 @@
+实现并发的最直接的方式是在操作系统级别使用进程。进程是运行在它自己的地址空间内的自包容的程序。
+
+**线程的创建**
+有四种方式：
+1、实现Runnable接口并重写run()方法
+public class StartRun implements Runnable{
+	public void run() {		
+	 }
+}
+使用：//创建实现类对象
+		StartRun st=new StartRun();
+		//创建代理类对象
+		Thread t=new Thread(st); 
+		//启动   开启线程
+		t.start();   //不保证立即运行，由cpu调用
+2、继承Thread类并重写run()方法
+public class StartThread extends Thread{
+	public void run() {
+	}
+}
+使用：//创建子类对象
+		StartThread st=new StartThread();
+		//启动   开启线程
+		st.start();   //不保证立即运行，由cpu调用
+3、使用Collable并重写call()接口
+class Run implements Callable<String>{    //里面是泛型
+	@Override
+	public Object call() throws Exception {
+		return null;
+	}
+}
+必须使用ExecutorService.submit()方法 调用它
+submit会返回一个对象Future，可以使用get()方法来得到该结果
+4、使用线程池
+		ExecutorService exec1=Executors.newCachedThreadPool();
+		   //创建所需数量的线程，在回收线程会停止创建新线程。
+		ExecutorService exec2=Executors.newFixedThreadPool(4); 
+		    //有限个线程执行任务
+		ExecutorService exec3=Executors.newSingleThreadExecutor();  
+		  //一个线程   会序列化任务
+		ExecutorService exec4=Executors.newScheduledThreadPool(4);        
+		  //参数是核心线程数，每隔一段时间重复执行任务。
+还有线程池的参数：
+corePollSize 	核心线程数
+queneCapacity		等待队列
+MaxPollSize	最大线程数
+keepAliveTime		线程空闲时间
+keepAliveTime		线程空闲时间
+rejectedExecutionHandler		任务拒绝处理器
+执行过程
+1.当线程数小于核心线程数时，创建线程。
+
+2.当线程数大于等于核心线程数，且任务队列未满时，将任务放入任务队列。
+
+3.当线程数大于等于核心线程数，且任务队列已满。(1)若线程数小于最大线程数，创建线程。(2)若线程数等于最大线程数，抛出异常，拒绝任务。
+
+当多个线程需要访问一个共享数据的时候就需要同步，不然会造成数据出错。
+
+**线程同步**
+_使用synchronized关键字同步_
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20191112185954993.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FuamlodWE=,size_16,color_FFFFFF,t_70)
+_使用Lock加锁_
+每次得显示的使用Lock，并且使用try  finally去关闭Lock，及unLock
+使用：Lock lock=new ReentrantLock();
+lock.lock();
+try{
+}finally{
+lock.unlock();
+}
+使用Lock如果出现了异常可以去处理，但是synchronized只会抛出异常，无法处理。
+
+_使用volatile关键字_
+volatile作为java中的关键词之一，用以声明变量的值可能随时会别的线程修改，使用volatile修饰的变量会强制将修改的值立即写入主存，主存中值的更新会使缓存中的值失效，volatile会禁止指令重排。volatile具有可见性、有序性，不具备原子性。
+注意，volatile不具备原子性，这是volatile与java中的synchronized、java.util.concurrent.locks.Lock最大的功能差异。
+如果要实现原子性，可以使用原子类AtomicInteger等原子性变量类。
+
+
+ReentrantLock是一个可重入锁，基本用法和synchronized差不多
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20191112190120899.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FuamlodWE=,size_16,color_FFFFFF,t_70)
+后面java为了优化锁还引入了自旋锁(CAS)，轻量级锁，偏向锁等。
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20191112190637371.png)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20191112190831753.png)
+但是CAS可能会出现ABA问题;及如果线程1将值改为B，线程2将值改为A，当线程3去修改值，到底修改了吗？
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20191112190955667.png)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20191112191015194.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FuamlodWE=,size_16,color_FFFFFF,t_70)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/201911121911168.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FuamlodWE=,size_16,color_FFFFFF,t_70)
+线程状态
+Thread类包含interrupt()方法，因此可以终止阻塞的任务，这个方法将设置线程的中断状态。
+
+可以使用sleep()和wait()方法让线程进入阻塞状态
+sleep和wait区别：
+1、wait需要notify和notifyAll方法唤醒，sleep里面的参数是毫秒数，让线程阻塞多长时间。
+2、wait会让线程释放锁，而sleep不会释放锁
+
+使用notify和notifyAll方法，或者java.util.concurrent类库中等价的signal()或signalAll()方法，线程才会进入就绪状态。
+
+一个线程可以在其他线程之上调用join()方法，其效果是等待一段时间直到第二个线程结束才恢复。
+
+
+在使用锁的时候可能会造成死锁
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20191112192352568.png)
+预防死锁的就是银行家算法
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20191112192530925.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FuamlodWE=,size_16,color_FFFFFF,t_70)
+总共的资源不仅足够一个线程的需求，还要满足其他线程的需求。
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20191112192806614.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L0FuamlodWE=,size_16,color_FFFFFF,t_70)
+
+解决死锁的就是哲学家算法
+5个哲学家围着吃饭，每个人中间有一个筷子，每个人必须拿着左右两个筷子才可以就餐，如果每个哲学家先拿起左边的筷子，哪每个哲学家就需要等待其他哲学家释放筷子，造成死锁。
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20191112193212846.png)
