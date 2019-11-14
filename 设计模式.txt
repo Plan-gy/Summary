@@ -1,0 +1,71 @@
+单例模式
+单例模式又分为饿汉式和懒汉式
+顾名思义，单例模式就是只有单个的对象实例。饿汉式就是当执行方法时直接就产生对象，懒汉式就是当你使用的时候才生成对象。
+要想生成一个实例，就要严格把控条件，进行判断是否有一个实例在外面，如果有就直接返回那个实例，要是没有就产生这个实例。
+饿汉式：
+
+public class SingletonHungry {
+//	2、私有静态属性    new对象
+	//类初始化时立即加载这个对象（无法延时加载）     加载类时，天然是安全的
+	==private static SingletonHungry instance=new SingletonHungry();==
+//	1、构造器私有
+	private SingletonHungry() {
+	}
+//	3、提供唯一的公共方法去或得这个对象   私有静态属性
+	//方法没有同步  效率高
+	public static SingletonHungry getInstance() {
+		return instance;
+	}
+}
+
+懒汉式：
+
+public class SingletonLazy implements Serializable{
+//	2、私有静态属性    new对象
+	//类初始化时延时加载这个对象（等到用的时候在加载）     加载类时，天然是安全的
+	==private static SingletonLazy instance;==
+//	1、构造器私有
+	private SingletonLazy() {
+	}
+//	3、提供唯一的公共方法去或得这个对象   私有静态属性
+	//方法同步  效率低
+	public static synchronized SingletonLazy getInstance() {
+		if(instance==null) {
+			instance=new SingletonLazy();
+		}
+		return instance;
+	}
+}
+
+饿汉式的双重检查机制(DCL)：为了防止并发访问。
+//DCL(double check lock)双重检查机制
+class Singleton{
+	private Singleton(){
+		
+	}
+	private volatile static Singleton instance;
+	public static Singleton getInstance() {
+		if(instance==null) {
+			synchronized (Singleton.class) {
+				if(instance==null) {
+					instance=new Singleton();;
+				}
+			}
+		}
+		return instance;
+	}
+}
+
+还可以将懒汉式放在内部类中，不太常用
+public class SingletonStatic {
+	private SingletonStatic() {
+		
+	}
+	private static class SingletonClassInstance{
+		private static final SingletonStatic instance=new SingletonStatic();
+	}
+	public static SingletonStatic getInstance() {
+		return SingletonClassInstance.instance;
+	}
+}
+因为本身是final的，所以只有一个对象实例。
