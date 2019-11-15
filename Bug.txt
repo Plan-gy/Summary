@@ -37,4 +37,8 @@ Date current=new Date();
 
 
 下面是输出结果
-![在这里插入图片描述](https://img-blog.csdnimg.cn/20191111205532734.png)
+
+
+判断这个人是组长
+先从发布任务的表中得到第一个userID，及Get（0）.getUserid。然后用这个id判断是否
+参与了活动，参与了就说明是，因为第一个一般都是组长。
