@@ -154,3 +154,55 @@ public class Number454 {
 	}
 
 }
+
+
+package algorithm2;
+/**
+ * 给定一个字符串 s，将 s 分割成一些子串，使每个子串都是回文串。
+
+返回 s 所有可能的分割方案。
+
+示例:
+
+输入: "aab"
+输出:
+[
+  ["aa","b"],
+  ["a","a","b"]
+]
+ */
+import java.util.ArrayList;
+import java.util.List;
+
+public class Number131 {
+	 List<List<String>> list = new ArrayList<>();
+	    public List<List<String>> partition(String s) {
+	        ArrayList<String>arr = new ArrayList<>();
+	        dfs(s,arr);
+	        return list;
+	    }
+	    private void dfs(String s, ArrayList<String> arr){
+	        if(s.length() == 0){
+	            list.add(new ArrayList(arr));
+	            return;
+	        }
+	        for(int i = 0; i < s.length(); i++){
+	            String res = s.substring(0,i+1);
+	            if(is(res)){
+	                arr.add(res);
+	                dfs(s.substring(i+1,s.length()), arr);
+	                arr.remove(arr.size()-1);
+	            }
+	        }
+	        return;
+	    }
+	    //判断是否为回文串
+	    private boolean is(String s){
+	        int n = s.length();
+	        if(n == 1) return true;
+	        for(int i = 0; i < n/2; i++){
+	            if(s.charAt(i) != s.charAt(n-1-i)) return false;
+	        }
+	        return true;
+	    }
+}
