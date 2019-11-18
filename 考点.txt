@@ -34,7 +34,8 @@ Mark Word中，如果CAS操作成功，持有偏向锁的线程以后每次进�
 3.java对象创建方式
 new   反射
 4种得到Class方法
-	ClassLoader都是加载一个类
+ClassLoader.getSystemClassLoader().loadClass("类的名字");
+都是加载一个类
 Class.forName 里面调用了 ClassLoader Class.forName 默认会初始化类。但是
  ClassLoader 不会，他只会将类加载到 JVM但是 Class.forName() 可以指定一个参数决
 定是否需要初始化
