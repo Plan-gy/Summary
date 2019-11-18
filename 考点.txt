@@ -33,6 +33,11 @@ Mark Word中，如果CAS操作成功，持有偏向锁的线程以后每次进�
 2.多线程的理解，锁
 3.java对象创建方式
 new   反射
+4种得到Class方法
+	ClassLoader都是加载一个类
+Class.forName 里面调用了 ClassLoader Class.forName 默认会初始化类。但是
+ ClassLoader 不会，他只会将类加载到 JVM但是 Class.forName() 可以指定一个参数决
+定是否需要初始化
 4.对象的特点
 继承，封装，多态，可能还有抽象
 5.数据库的了解
@@ -53,12 +58,7 @@ mkdir：创建目录
 rmdir：删除空文件夹
 cp：复制文件 或文件夹
 mv：移动文件或文件夹，可以在移动的时候重命名
-
-
 ls：查看文件
-
-
-
 
 网络命令：
 Ifconfig：查看网卡信息
