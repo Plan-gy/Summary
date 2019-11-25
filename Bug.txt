@@ -55,3 +55,13 @@ Date current=new Date();
 遍历statistics表中这个任务统计，得到所有的已签到数。
 遍历statictics每次得到这一天的这个任务的签到名，和所有的名字，id
 在遍历user表得到里面的m未签到的名字。放入结果并返回。
+
+
+
+
+
+接口不通//今天的学习时间
+命名不规范//总时间
+
+状态postman测试时learning，而小程序端是resting。
+后三个数据问题
