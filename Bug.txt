@@ -63,5 +63,19 @@ Date current=new Date();
 接口不通//今天的学习时间
 命名不规范//总时间
 
+
 状态postman测试时learning，而小程序端是resting。
+这里刚开始弄的时候以为是今天的所有学习时间，所以处理麻烦，
+//                if(u.getEndTime()!=null){
+//                    Long endTime = u.getEndTime()/1000;
+//                    if(u.getStartTime()>c.getTimeInMillis()){     //开始时间大于当前的6点   说明今天的学习早就开始了
+//                        if(comp>startTime && endTime==null){   // 遍历今天的   当前时间大于开始时间    没有结束时间    学习状态
+//                            all+=(int)(comp-startTime);
+//                        }else if(comp>endTime){       //当前时间大于这次的结束时间    将这些时间加到今天时间内。
+//                            all+= (int) (endTime-startTime);
+//                        } else{
+//                            return JsonUtils.objectToJson("status:[resting]");;     //都不满足就说明今天还没开始学习
+//                        }
+//                    }
+
 后三个数据问题
