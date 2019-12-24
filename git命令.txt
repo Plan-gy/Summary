@@ -19,3 +19,17 @@ git add
 git add .
 会递归地添加当前工作目录中的所有文件
 
+创建了新的仓库，要修改github的responsibal仓库地址
+ 直接修改远程地址
+进入testGit/ 根目录
+git remote 查看所有远程仓库：git remote xxx查看指定远程仓库地址（ps:此处的xxx为origin）
+修改旧仓库地址为：git remote set-url origin https://github.com/yohayoha/testGit.git
+查看地址是否已修改：git remote -v
+
+
+先删除远程仓库再添加远程仓库
+进入testGit/ 根目录
+git remote 查看所有远程仓库， git remote xxx 查看指定远程仓库地址
+git remote rm origin
+git remote add origin https://github.com/yohayoha/testGit.git
+
