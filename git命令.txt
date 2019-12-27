@@ -3,6 +3,8 @@ git commit -m "虚拟机字节码执行引擎"你的改动已经提交到了 HEA
 git push -u origin master	同步github仓库	执行命令以将这些改动提交到远端仓库
 
 
+git config --global user.name ""
+git config --global user.email ""
 
 
 
@@ -32,4 +34,6 @@ git remote 查看所有远程仓库：git remote xxx查看指定远程仓库地�
 git remote 查看所有远程仓库， git remote xxx 查看指定远程仓库地址
 git remote rm origin
 git remote add origin https://github.com/yohayoha/testGit.git
+
+
 
