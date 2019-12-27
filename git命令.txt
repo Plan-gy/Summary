@@ -6,8 +6,6 @@ git push -u origin master	同步github仓库	执行命令以将这些改动提�
 git config --global user.name ""
 git config --global user.email ""
 
-
-
 git init
 在本地新建一个repo,进入一个项目目录,执行git init,会初始化一个repo,并在当前文件夹下创建一个.git文件夹.
 
