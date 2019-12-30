@@ -34,4 +34,21 @@ git remote rm origin
 git remote add origin https://github.com/yohayoha/testGit.git
 
 
+git init 	将当前目录作为git仓库。
+git clone <repo> <directory>  将克隆到指定目录下
+git status 用来查看上次提交之后是否有修改
+git diff 查看执行git status 的结果的详细信息。
+使用 git add 命令将想要快照的内容写入缓存区,而执行 git commit 将缓存区内容添加到仓库中
+git reset HEAD 命令用于取消已缓存的内容。
+
+
+git 分支管理
+git branch  名字	创建分支
+git checkout 名字	切换分支
+git merge 	合并分支
+git branch -d 名字	删除分支
+
+
+git remote add [shortname] [url]	添加一个远程仓库
+git remote -v	查看当前的远程库
 
